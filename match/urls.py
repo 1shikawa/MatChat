@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import index, user
+from .views import index, user, reaction
+from .controller import reaction_controller
 
 app_name = 'match'
 
@@ -11,4 +12,6 @@ urlpatterns = [
     path('users/', user.gets, name='users'),
     path('users/profile/<int:user_id>', user.profile, name='profile'),
     path('users/profile/<int:user_id>/edit/', user.edit, name='profile_edit'),
+    path('reactions/', reaction_controller.create, name='reactions'),
+    path('matching/', reaction.matching, name='matching'),
 ]
