@@ -1,0 +1,66 @@
+from django.shortcuts import render, loader, redirect
+from django.http import HttpResponse
+
+from forms.user_regist import RegistForm
+from forms.user_profile import ProfileForm
+from forms.user_edit import EditForm
+from forms.user_list import UserListForm
+
+
+def regist(request):
+    if request.method == 'GET':
+        form = RegistForm()
+    else:
+        form = RegistForm(request.POST, request.FILES)
+        if form.is_valid():
+            print('user_regist is_valid')
+            form.save(request.POST)
+            return redirect('/login/')
+        else:
+            print('user_regist false is_valid')
+
+    template = loader.get_template('regist.html')
+    context = {
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def gets(request):
+    current_userid = request.user.id
+    if request.method == 'GET':
+        form = UserListForm(request.GET or None)
+        form.load(current_userid)
+
+    template = loader.get_template('users.html')
+    context = {
+        'form': form,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def profile(request, user_id):
+    if request.method == 'GET':
+        form = ProfileForm(request.GET or None)
+        form.load(user_id) # 追加
+        data = {
+                'form': form,
+                'iscurrent': request.user.id == user_id,
+        }
+        return render(request, 'profile.html', data)
+
+def edit(request, user_id):
+    if request.method == 'GET':
+        form = EditForm(request.GET or None)
+        form.load(user_id)
+    else:
+        form = EditForm(request.POST or None, request.FILES)
+        if form.is_valid():
+            print('user_edit is_valid')
+            form.save(request.POST, user_id)
+
+    template = loader.get_template('edit.html')
+    context = {
+        'form':form,
+    }
+    return HttpResponse(template, render(context, request))
