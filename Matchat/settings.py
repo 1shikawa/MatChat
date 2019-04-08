@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'bootstrap4',# ===追加===
     'fontawesome',# ===追加===
     'imagekit',# ===追加===
+    # 'channels',# ===追加===
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,14 @@ LOGIN_REDIRECT_URL = '/users/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+ASGI_APPLICATION = 'Matchat.routing.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}

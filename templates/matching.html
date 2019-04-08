@@ -31,12 +31,15 @@
                             <div class="matchingPerson_name">
                                 {{ matching.to_user.name }}
                             </div>
+                            <!-- ==========ここから追加する========== -->
                             <form action="/chat/create/{{ matching.to_user.id }}" accept-charset="UTF-8" method="post">
                                 <input name="utf8" type="hidden" value="✓"><input type="hidden"
                                                                                   name="authenticity_token">
                                 {% csrf_token %}
                                 <input type="submit" name="commit" value="チャットを開く" class="chatForm_btn"
                                        data-disable-with="チャットを開く"/>
+                            </form>
+                            <!-- ==========ここまで追加する========== -->
                             </form>
                         </div>
                     {% endfor %}

@@ -42,12 +42,13 @@ def gets(request):
 def profile(request, user_id):
     if request.method == 'GET':
         form = ProfileForm(request.GET or None)
-        form.load(user_id) # 追加
+        form.load(user_id)  # 追加
         data = {
-                'form': form,
-                'iscurrent': request.user.id == user_id,
+            'form': form,
+            'iscurrent': request.user.id == user_id,
         }
         return render(request, 'profile.html', data)
+
 
 def edit(request, user_id):
     if request.method == 'GET':
@@ -58,9 +59,13 @@ def edit(request, user_id):
         if form.is_valid():
             print('user_edit is_valid')
             form.save(request.POST, user_id)
+        else:
+            print('user_edit false is_valid')
+        if form.is_save:
+            return redirect('/users/profile/' + str(id))
 
     template = loader.get_template('edit.html')
     context = {
-        'form':form,
+        'form': form,
     }
-    return HttpResponse(template, render(context, request))
+    return HttpResponse(template.render(context, request))
