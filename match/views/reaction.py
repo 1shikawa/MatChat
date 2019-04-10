@@ -1,7 +1,7 @@
-from django.shortcuts import render, loader
+from django.shortcuts import loader
 from django.http import HttpResponse
 
-from forms.reaction import ReactionForm
+from match.forms.reaction import ReactionForm
 
 def matching(request):
     form = ReactionForm(request.GET)

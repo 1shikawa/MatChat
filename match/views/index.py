@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 
-from forms.login import LoginForm
+from match.forms.login import LoginForm
 
 def top(request):
     return render(request, 'index.html')

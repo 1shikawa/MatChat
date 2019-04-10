@@ -1,11 +1,11 @@
 from django.shortcuts import render, loader, redirect
 from django.http import HttpResponse
 
-from forms.user_regist import RegistForm
-from forms.user_profile import ProfileForm
-from forms.user_edit import EditForm
-from forms.user_list import UserListForm
 
+from match.forms.user_regist import RegistForm
+from match.forms.user_profile import ProfileForm
+from match.forms.user_edit import EditForm
+from match.forms.user_list import UserListForm
 
 def regist(request):
     if request.method == 'GET':

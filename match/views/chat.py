@@ -1,8 +1,8 @@
-from django.shortcuts import render, loader, redirect
+from django.shortcuts import loader, redirect
 from django.http import HttpResponse
 
 from match.controller import chat_controller
-from forms.chat import ChatForm
+from match.forms.chat import ChatForm
 import json
 
 
